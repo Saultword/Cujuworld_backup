@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<!--
+	Cuju.world
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Cuju.world</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>CujuWorld</strong> by cuju.world</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>Cuju World<br />
+											</h1>
+											<p>Make soccer more fun</p>
+										</header>
+										<p>Transform your sports moments into iconic masterpieces with StarStyle AI! Our cutting-edge platform analyzes your sports videos frame by frame, using advanced AI to identify and match your movements to professional athletes' signature styles. Whether you're shooting hoops, scoring goals, or making that perfect serve, our technology compares your technique to the world's top stars in soccer.
+                                            
+                                            
+
+.</p>
+<p>使用StarStyle AI，將您的運動時刻轉化為標誌性的傑作！我們尖端的平台能逐幀分析您的運動影片，運用先進的AI技術，識別並匹配您的動作與職業運動員的招牌風格。我們的技術能將您的技巧與足球領域的世界頂尖明星進行比較。</p>
+										<ul class="actions">
+
+										</ul>
+									</div>
+									<span class="image object">
+										<img src="images/messi_kick.png" alt="" />
+									</span>
+								</section>
+
+							<!-- Section -->
+								
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage 首頁</a></li>
+										<li><a href="generic.html">Style recognization 風格識別</a></li>
+										<li><a href="elements.html">Create your postcard! 生成明信片</a></li>
+
+
+
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+					<header class="major">
+						<h2>RecentWorks</h2>
+					</header>
+<div class="mini-posts" id="recentWorks">
+    <script>
+// Add this script to fetch and display recent works
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/get_recent_style_transfers')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('recentWorks');
+            if (data.recent_works && data.recent_works.length > 0) {
+                container.innerHTML = '';
+                data.recent_works.forEach(work => {
+                    const article = document.createElement('article');
+                    const date = new Date(work.timestamp);
+                    const formattedDate = date.toLocaleString();
+                    
+                    article.innerHTML = `
+                        <a href="${work.path}" class="image" target="_blank">
+                            <img src="${work.path}" alt="Recent work" />
+                        </a>
+                        <p>Generated: ${formattedDate}</p>
+                    `;
+                    container.appendChild(article);
+                });
+            } else {
+                container.innerHTML = '<p>No recent works yet</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recent works:', error);
+            document.getElementById('recentWorks').innerHTML = '<p>Error loading recent works</p>';
+        });
+});
+</script>
+</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Contact us</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

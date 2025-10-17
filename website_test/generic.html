@@ -1,0 +1,1064 @@
+<!DOCTYPE HTML>
+<!--
+    Editorial by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Cuju.world</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			/* 右侧操作指引侧边栏 - 优化版 */
+			#right-sidebar {
+				position: fixed;
+				right: 0;
+				top: 0;
+				height: 100vh;
+				width: 400px; /* 从300px增加到400px */
+				background: white;
+				box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+				z-index: 1000;
+				transition: transform 0.3s ease;
+				/* 初始状态为关闭 */
+				transform: translateX(100%);
+			}
+
+			#right-sidebar.open {
+				transform: translateX(0);
+			}
+
+			#right-sidebar .inner {
+				padding: 25px; /* 从20px增加到25px */
+				height: 100%;
+				overflow-y: auto;
+			}
+
+			#right-sidebar header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 25px; /* 从20px增加到25px */
+				border-bottom: 3px solid #4CAF50; /* 加粗边框 */
+				padding-bottom: 15px; /* 增加内边距 */
+			}
+
+			#right-sidebar h2 {
+				margin: 0;
+				color: #4CAF50;
+				font-size: 1.8em; /* 增大标题字体 */
+			}
+
+			.close-btn {
+				font-size: 32px; /* 从24px增加到32px */
+				cursor: pointer;
+				color: #777;
+				transition: color 0.3s;
+			}
+
+			.close-btn:hover {
+				color: #333;
+			}
+			
+			.toggle-btn {
+				position: absolute;
+				left: -50px; /* 从-40px增加到-50px */
+				top: 50%;
+				transform: translateY(-50%);
+				width: 50px; /* 从40px增加到50px */
+				height: 120px; /* 从100px增加到120px */
+				background: #4CAF50;
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				border-radius: 5px 0 0 5px;
+				box-shadow: -3px 0 5px rgba(0,0,0,0.1);
+				transition: background 0.3s;
+			}
+
+			.toggle-btn:hover {
+				background: #3d8b40;
+			}
+
+			.toggle-btn i {
+				font-size: 24px; /* 增大图标 */
+			}
+
+			/* 操作指引样式 */
+			.tutorial-steps {
+				margin-top: 25px; /* 从20px增加到25px */
+			}
+
+			.step {
+				position: relative;
+				border-left: 4px solid #4CAF50; /* 加粗左侧边框 */
+				padding: 20px 0 20px 25px; /* 增加内边距 */
+				margin-bottom: 30px; /* 从25px增加到30px */
+			}
+
+			.step:last-child {
+				margin-bottom: 15px; /* 增加底部间距 */
+			}
+
+			.step-number {
+				position: absolute;
+				top: 0;
+				left: -20px; /* 从-15px增加到-20px */
+				width: 40px; /* 从30px增加到40px */
+				height: 40px; /* 从30px增加到40px */
+				background: #4CAF50;
+				color: white;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: bold;
+				font-size: 1.4em; /* 从1.2em增加到1.4em */
+				box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* 增大阴影 */
+			}
+
+			.step h3 {
+				margin: 0 0 15px 0; /* 增加底部间距 */
+				color: #4CAF50;
+				font-size: 1.8em; /* 从1.1em增加到1.8em */
+			}
+
+			.step img {
+				width: 100%;
+				max-width: 450px; /* 从250px增加到350px */
+				height: auto;
+				border-radius: 8px; /* 增大圆角 */
+				margin: 15px 0; /* 增加外边距 */
+				box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* 增强阴影 */
+			}
+
+			.step p {
+				margin: 10px 0 0 0; /* 增加外边距 */
+				font-size: 1.6em; /* 从0.9em增加到1.6em */
+				color: #666;
+				line-height: 1.6; /* 增加行高 */
+			}
+
+			@media screen and (max-width: 900px) {
+				#right-sidebar {
+					width: 450px; /* 从250px增加到350px */
+				}
+				
+				.toggle-btn {
+					height: 100px; /* 从80px增加到100px */
+					left: -45px; /* 调整位置 */
+					width: 45px;
+				}
+				
+				.step img {
+					max-width: 500px; /* 调整最大宽度 */
+				}
+			}
+			
+			@media screen and (max-width: 600px) {
+				#right-sidebar {
+					width: 320px;
+				}
+				
+				#right-sidebar .inner {
+					padding: 20px;
+				}
+				
+				.step img {
+					max-width: 250px;
+				}
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>CujuWorld</strong> by cuju.world</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Style recognization 風格識別</h1>
+									</header>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+
+									<hr class="major" />
+
+									
+<h2>Which soccer player are you most like? 你會成爲哪位球星？</h2>
+<!-- Upload area-->
+
+                                    
+                                    
+                                    
+<div class="video-upload-container">
+    <input type="file" id="videoUpload" accept="video/*" style="display: none;">
+
+    <span id="fileName" style="margin-left: 10px;"></span>
+    <div class="video-preview" id="videoPreview"></div>
+    
+    <button class="button" id="analyzeBtn" style="margin-top: 10px; display: none;">Analysis</button>
+<!-- 20250907在拖放区域之前添加预置视频选择 -->
+<div style="margin-bottom: 20px;">
+    <label for="presetVideoSelect">Choose Video 選擇影片: </label>
+    <select id="presetVideoSelect" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="">-- Plese choose --</option>
+        <!-- 选项将通过JavaScript动态加载 -->
+    </select>
+    <button id="loadPresetBtn" class="button small" style="margin-left: 10px;">Load the video 預覽</button>
+</div>   
+ <!-- 20250907在拖放区域之前添加预置视频选择结束 -->   
+    <!-- 添加拖放区域20250812修改 -->
+    <div id="dragDropArea" 
+         style="border: 2px dashed #ccc; 
+                border-radius: 10px; 
+                padding: 30px; 
+                text-align: center;
+                margin-bottom: 20px;
+                cursor: pointer;">
+        <p style="font-size: 1.2em; margin-bottom: 15px;">
+            <i class="icon solid fa-cloud-upload-alt" style="font-size: 2em; margin-right: 10px;"></i>
+            Drag & Drop your video here
+        </p>
+
+    </div>
+     <!-- 添加拖放区域20250812修改结束 -->   
+    
+    <input type="file" id="videoUpload" accept="video/*" style="display: none;">
+    <span id="fileName" style="margin-left: 10px; display: block; margin-top: 10px;"></span>
+    <div class="video-preview" id="videoPreview"></div>
+    
+    <button class="button" id="analyzeBtn" style="margin-top: 10px; display: none;">Analysis</button>    
+    <!-- result area -->
+    <div class="results" id="results" style="margin-top: 20px; display: none;">
+        <h3>Result</h3>
+        <div class="result-container">
+            <div class="result-content" id="resultContent"></div>
+            <div class="key-frame">
+                <h4>Highlight!</h4>
+                <img id="keyFrameImage" style="max-width: 300px; max-height: 300px;">
+                <div id="keyframeDebugInfo" style="font-size: 12px; color: #666; margin-top: 5px;"></div>
+            </div>
+        </div>
+        <div id="serverResponseInfo" style="margin-top: 15px; font-size: 12px; color: #888;"></div>
+    </div>
+<!-- history area -->
+<div class="history-section" style="margin-top: 30px;">
+    <h3>History</h3>
+    <div id="keyframeHistory" class="history-grid"></div>
+</div>
+
+
+<style>
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+.history-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.history-item:hover {
+    border-color: #4CAF50;
+}
+.history-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+.history-info {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #666;
+}
+</style>
+
+<div class="segment-results" id="segmentResults" style="margin-top: 30px; display: none;">
+    <h3>Segmented Analysis 部分動作分析</h3>
+    <div class="segments-container" id="segmentsContainer" style="display: flex; flex-wrap: wrap; gap: 20px;"></div>
+</div>
+    
+<style>
+.segment-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        width: 180px;
+        text-align: center;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+.segment-keyframe {
+        width: 150px;
+        height: 150px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+    
+.segment-time {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    
+.segment-wheel {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 10px;
+    }
+    
+.wheel-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #f0f0f0;
+        clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    }
+    
+.wheel-fill {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #4CAF50;
+        clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+        transform: rotate(0deg);
+        transition: transform 0.5s ease;
+    }
+    
+.wheel-center {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+.wheel-value {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+.segment-star {
+        font-weight: bold;
+        font-size: 14px;
+    }
+#dragDropArea {
+    transition: all 0.3s ease;
+}
+#dragDropArea.highlight {
+    border-color: #4CAF50;
+    background-color: #f8fff8;
+}
+    
+</style>
+<script>
+    
+// 20250812修改，管理拖放上传视频代码
+const dragDropArea = document.getElementById('dragDropArea');
+const fileInput = document.getElementById('videoUpload');
+
+// 添加拖放事件处理
+dragDropArea.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '#4CAF50';
+    this.style.backgroundColor = '#f8fff8';
+});
+
+dragDropArea.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '#ccc';
+    this.style.backgroundColor = '';
+});
+
+dragDropArea.addEventListener('drop', function(e) {
+    e.preventDefault();
+    this.style.borderColor = '#ccc';
+    this.style.backgroundColor = '';
+    
+    // 获取拖放的文件
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        // 检查是否为视频文件
+        if (files[0].type.startsWith('video/')) {
+            // 模拟文件输入
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(files[0]);
+            fileInput.files = dataTransfer.files;
+            
+            // 触发文件输入事件
+            const event = new Event('change', { bubbles: true });
+            fileInput.dispatchEvent(event);
+        } else {
+            alert('Please drop a video file (MP4, MOV, AVI, etc.)');
+        }
+    }
+});
+
+// 点击拖放区域触发文件选择
+dragDropArea.addEventListener('click', function() {
+    fileInput.click();
+});
+
+// 新增函数：显示历史记录
+function displayHistory(history) {
+    const container = document.getElementById('keyframeHistory');
+    container.innerHTML = '';
+    
+    history.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'history-item';
+        itemDiv.innerHTML = `
+            <img src="data:image/jpeg;base64,${item.keyframe}" alt="历史记录">
+            <div class="history-info">
+                ${new Date(item.timestamp).toLocaleString()}
+            </div>
+        `;
+        
+        itemDiv.addEventListener('click', function() {
+            // 跳转到elements.html并传递索引
+            window.location.href = `elements.html?history_index=${index}`;
+        });
+        
+        container.appendChild(itemDiv);
+    });
+    
+    // 如果没有历史记录，显示提示
+    if (history.length === 0) {
+        container.innerHTML = '<p>暂无历史记录</p>';
+    }
+}
+
+// 页面加载时获取历史记录
+window.addEventListener('load', function() {
+    fetch('/get_keyframe_history')
+        .then(response => response.json())
+        .then(data => displayHistory(data.history))
+        .catch(error => console.error('获取历史记录失败:', error));
+});
+    
+</script>
+</div>
+
+<style>
+.video-upload-container {
+    margin: 20px 0;
+}
+.video-preview {
+    margin-top: 15px;
+    max-width: 500px;
+    max-height: 1000px;
+}
+.video-preview video {
+    max-width: 100%;
+    max-height: 100%;
+}
+.results {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+.result-container {
+    display: flex;
+    gap: 20px;
+}
+.result-content {
+    flex: 1;
+}
+.key-frame {
+    flex: 1;
+    text-align: center;
+}
+.key-frame img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: #fff;
+}
+.result-item {
+    margin: 10px 0;
+}
+.progress-bar {
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+.progress {
+    height: 100%;
+    background: #4CAF50;
+    width: 0%;
+    transition: width 0.3s;
+}
+.debug-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+</style>
+
+<script>
+
+// 20250907修改选择视频js代码
+// 在现有JavaScript代码中添加以下内容
+
+// 获取预置视频列表
+function loadPresetVideos() {
+    fetch('/get_preset_videos')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById('presetVideoSelect');
+            select.innerHTML = '<option value="">-- 请选择 --</option>';
+            
+            data.videos.forEach(video => {
+                const option = document.createElement('option');
+                option.value = video;
+                option.textContent = video;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error('获取预置视频失败:', error));
+}
+
+// 加载预置视频
+document.getElementById('loadPresetBtn').addEventListener('click', function() {
+    const selectedVideo = document.getElementById('presetVideoSelect').value;
+    if (!selectedVideo) {
+        alert('请选择一个预置视频');
+        return;
+    }
+    
+    // 显示加载中
+    document.getElementById('fileName').textContent = `正在加载: ${selectedVideo}`;
+    document.getElementById('analyzeBtn').style.display = 'block';
+    
+    // 创建视频预览
+    const videoPreview = document.getElementById('videoPreview');
+    videoPreview.innerHTML = '';
+    
+    const video = document.createElement('video');
+    video.src = `/back_video/${selectedVideo}`;
+    video.controls = true;
+    video.style.maxWidth = '100%';
+    videoPreview.appendChild(video);
+    
+    // 隐藏结果区域
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('segmentResults').style.display = 'none';
+    
+    // 存储当前选择的预置视频名称
+    videoPreview.dataset.presetVideo = selectedVideo;
+});
+
+// 修改分析按钮点击事件处理
+document.getElementById('analyzeBtn').addEventListener('click', function() {
+    const videoPreview = document.getElementById('videoPreview');
+    const presetVideo = videoPreview.dataset.presetVideo;
+    
+    // 检查是上传的视频还是预置视频
+    if (presetVideo) {
+        // 使用预置视频
+        analyzePresetVideo(presetVideo);
+    } else {
+        // 使用上传的视频 (原有逻辑)
+        const fileInput = document.getElementById('videoUpload');
+        if (!fileInput.files.length) return;
+        
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('video', file);
+        
+        performAnalysis(formData);
+    }
+});
+
+// 分析预置视频
+function analyzePresetVideo(videoName) {
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = '分析中...';
+    
+    // 清空之前的显示
+    document.getElementById('resultContent').innerHTML = '';
+    document.getElementById('keyFrameImage').src = '';
+    document.getElementById('keyframeDebugInfo').textContent = '';
+    document.getElementById('serverResponseInfo').textContent = '';
+    document.getElementById('segmentsContainer').innerHTML = '';
+    
+    // 显示加载状态
+    const loadingInfo = document.createElement('div');
+    loadingInfo.textContent = '分析中...';
+    document.getElementById('resultContent').appendChild(loadingInfo);
+    
+    // 发送到后端处理
+    fetch('/analyze_preset_video', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ video_name: videoName })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("API Response:", data);
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // 显示关键帧
+        if (data.key_frame) {
+            const imgElement = document.getElementById('keyFrameImage');
+            imgElement.src = `data:image/jpeg;base64,${data.key_frame}`;
+        } else {
+            document.getElementById('keyframeDebugInfo').textContent = '未收到关键帧数据';
+        }
+        
+        // 显示结果
+        displayResults(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const errorDiv = document.createElement('div');
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = `分析失败: ${error.message}`;
+        document.getElementById('resultContent').innerHTML = '';
+        document.getElementById('resultContent').appendChild(errorDiv);
+    })
+    .finally(() => {
+        analyzeBtn.disabled = false;
+        analyzeBtn.textContent = '分析动作';
+    });
+}
+
+// 页面加载时获取预置视频列表
+window.addEventListener('load', function() {
+    loadPresetVideos();
+    // 原有的历史记录加载代码...
+});   
+    
+    
+    
+    
+    
+    
+    
+// 20250907修改选择视频js代码结束    
+    
+    
+    
+document.getElementById('videoUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('analyzeBtn').style.display = 'block';
+    
+    const videoPreview = document.getElementById('videoPreview');
+    videoPreview.innerHTML = '';
+    
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(file);
+    video.controls = true;
+    videoPreview.appendChild(video);
+    
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('segmentResults').style.display = 'none';
+});
+
+document.getElementById('analyzeBtn').addEventListener('click', function() {
+    const fileInput = document.getElementById('videoUpload');
+    if (!fileInput.files.length) return;
+    
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('video', file);
+    
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = 'analyzing...';
+    
+    // 清空之前的显示
+    document.getElementById('resultContent').innerHTML = '';
+    document.getElementById('keyFrameImage').src = '';
+    document.getElementById('keyframeDebugInfo').textContent = '';
+    document.getElementById('serverResponseInfo').textContent = '';
+    document.getElementById('segmentsContainer').innerHTML = '';
+    
+    // 显示加载状态
+    const loadingInfo = document.createElement('div');
+    loadingInfo.textContent = 'analyzing...';
+    document.getElementById('resultContent').appendChild(loadingInfo);
+    
+    // 发送到后端处理
+    fetch('/analyze_video', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("API Response:", data); // 添加调试信息
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // 显示关键帧
+        if (data.key_frame) {
+            const imgElement = document.getElementById('keyFrameImage');
+            imgElement.src = `data:image/jpeg;base64,${data.key_frame}`;
+            
+            // 图片加载错误处理
+            //20250731修改
+           // imgElement.onerror = function() {
+              //  document.getElementById('keyframeDebugInfo').innerHTML = 
+                //    '<div style="color:red;">图片加载失败！</div>';
+           // };
+        } else {
+            document.getElementById('keyframeDebugInfo').textContent = '未收到关键帧数据';
+        }
+        
+        // 只调用一次 displayResults
+        displayResults(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const errorDiv = document.createElement('div');
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = `分析失败: ${error.message}`;
+        document.getElementById('resultContent').innerHTML = '';
+        document.getElementById('resultContent').appendChild(errorDiv);
+    })
+    .finally(() => {
+        analyzeBtn.disabled = false;
+        analyzeBtn.textContent = 'Analyzing actions...';
+    });
+});
+
+const actionToStarMap = {
+    'CR_kick': 'Cristiano Ronaldo',
+    'MS_kick': 'Lionel Messi',
+    'BZ_kick': 'Karim Benzema',
+    'KK_kick': 'Kaká (Ricardo Izecson dos Santos Leite)',
+    'mod_kick': 'Luka Modrić'
+};
+
+function displayResults(data) {
+    const resultContent = document.getElementById('resultContent');
+    resultContent.innerHTML = '';
+    
+    if (!data.results || data.results.length === 0) {
+        resultContent.textContent = '未获得分析结果';
+        return;
+    }
+    
+    // 显示分析结果
+    data.results.forEach(result => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        
+        // 转换标签为球星名称
+        const starName = actionToStarMap[result.label] || result.label;
+        const label = document.createElement('div');
+        label.textContent = `${starName}: ${(result.score * 100).toFixed(2)}%`;
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        
+        const progress = document.createElement('div');
+        progress.className = 'progress';
+        progress.style.width = `${result.score * 100}%`;
+        
+        progressBar.appendChild(progress);
+        item.appendChild(label);
+        item.appendChild(progressBar);
+        resultContent.appendChild(item);
+    });
+    
+    // 显示建议
+    if (data.prompt) {
+        const prompt = document.createElement('div');
+        prompt.className = 'prompt';
+        prompt.style.marginTop = '20px';
+        prompt.style.fontWeight = 'bold';
+        prompt.textContent = data.prompt; // 添加提示内容
+        resultContent.appendChild(prompt);
+    }
+    
+    document.getElementById('results').style.display = 'block';
+    
+    // 显示分段结果
+    if (data.segments && data.segments.length > 0 && data.segment_keyframes) {
+        console.log("渲染分段结果", data.segments, data.segment_keyframes);
+        const container = document.getElementById('segmentsContainer');
+        container.innerHTML = '';
+        
+        data.segments.forEach((segment, index) => {
+            const segmentCard = document.createElement('div');
+            segmentCard.className = 'segment-card';
+            
+            // 查找对应的关键帧
+            const keyframe = data.segment_keyframes.find(
+                kf => kf.segment_num === segment.segment_num
+            );
+            
+            // 确保分段有结果
+            if (segment.results && segment.results.length > 0) {
+                const starName = actionToStarMap[segment.results[0].label] || segment.results[0].label;
+                const score = segment.results[0].score * 100;
+                const rotation = (score / 100) * 360;
+                
+                segmentCard.innerHTML = `
+                    ${keyframe ? `<img src="data:image/jpeg;base64,${keyframe.image}" class="segment-keyframe">` : 
+                      '<div class="segment-keyframe" style="background:#eee;display:flex;align-items:center;justify-content:center;">No Image</div>'}
+                    <div class="segment-time">Time: ${segment.time.toFixed(1)}s</div>
+                    <div class="segment-wheel">
+                        <div class="wheel-background"></div>
+                        <div class="wheel-fill" style="transform: rotate(${rotation}deg);"></div>
+                        <div class="wheel-center">
+                            <div class="wheel-value">${score.toFixed(0)}%</div>
+                        </div>
+                    </div>
+                    <div class="segment-star">${starName}</div>
+                `;
+            } else {
+                segmentCard.innerHTML = `<p>该分段无分析结果</p>`;
+            }
+            
+            container.appendChild(segmentCard);
+        });
+        
+        document.getElementById('segmentResults').style.display = 'block';
+    } else {
+        console.log("没有分段数据或数据格式不正确", data.segments, data.segment_keyframes);
+        document.getElementById('segmentResults').style.display = 'none';
+    }
+    
+    displayHistory(data.history || []);
+}
+</script>									<h2>Upload the video let us find who is the superstar you would be!</h2>
+                             <h2>上傳影片，讓我們找出你將成為哪位超級巨星！</h2>      
+									
+
+	
+
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage 首頁</a></li>
+										<li><a href="generic.html">Style recognization 風格識別</a></li>
+										<li><a href="elements.html">Create your postcard! 生成明信片</a></li>
+
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+					<header class="major">
+						<h2>RecentWorks</h2>
+					</header>                                                                       
+<div class="mini-posts" id="recentWorks">
+<script>
+// Add this script to fetch and display recent works
+    
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/get_recent_style_transfers')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('recentWorks');
+            if (data.recent_works && data.recent_works.length > 0) {
+                container.innerHTML = '';
+                data.recent_works.forEach(work => {
+                    const article = document.createElement('article');
+                    const date = new Date(work.timestamp);
+                    const formattedDate = date.toLocaleString();
+                    
+                    article.innerHTML = `
+                        <a href="${work.path}" class="image" target="_blank">
+                            <img src="${work.path}" alt="Recent work" />
+                        </a>
+                        <p>Generated: ${formattedDate}</p>
+                    `;
+                    container.appendChild(article);
+                });
+            } else {
+                container.innerHTML = '<p>No recent works yet</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching recent works:', error);
+            document.getElementById('recentWorks').innerHTML = '<p>Error loading recent works</p>';
+        });
+});
+</script>
+    
+
+</div>
+<div id="right-sidebar">
+    <div class="inner">
+        <header>
+            <h2>Operation Guide 指南</h2>
+            <span class="close-btn" id="closeSidebar">&times;</span>
+        </header>
+        
+        <div class="tutorial-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Upload Video 上傳影片</h3>
+                    <img src="images/upload-icon.png" alt="Upload Video">
+                    <p>Click "Select Video File" button or drag and drop video file to the designated area</p>
+                    <p>點擊「Select Video File」按鈕，或將影片檔案拖放至指定區域</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Preview Video 預覽</h3>
+                    <img src="images/preview-icon.png" alt="Preview Video">
+                    <p>Confirm the uploaded video is correct, use player controls to adjust playback</p>
+                    <p>確認上傳的影片誤，並調整播放</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Analyze Movements 分析</h3>
+                    <img src="images/analyze-icon.png" alt="Analyze Movements">
+                    <p>Click "Analysis" button to start analyzing your football playing style</p>
+                    <p>點擊「Analysis」按鈕，開始分析你的足球踢球風格</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>View Results 結果</h3>
+                    <img src="images/results-icon.png" alt="View Results">
+                    <p>Check system analysis results to see which football star's style matches yours</p>
+                    <p>查看分析結果，哪位足球明星的風格與你相符</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Generate Poster 生成明信片</h3>
+                    <img src="images/generate-icon.png" alt="Generate Poster">
+                    <p>Go to "Create your postcard!" page to generate personalized poster</p>
+                     <p>前往「Create your postcard!」頁面生成個人化明信片</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toggle-btn" id="toggleSidebar">
+        <i class="icon solid fa-question"></i>
+    </div>
+</div>   
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rightSidebar = document.getElementById('right-sidebar');
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const closeBtn = document.getElementById('closeSidebar');
+    
+    // 初始显示侧边栏
+    setTimeout(() => {
+        rightSidebar.classList.add('open');
+    }, 1000);
+    
+    // 切换侧边栏显示
+    toggleBtn.addEventListener('click', function() {
+        rightSidebar.classList.toggle('open');
+    });
+    
+    // 关闭侧边栏
+    closeBtn.addEventListener('click', function() {
+        rightSidebar.classList.remove('open');
+    });
+});
+</script>                                
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Contact us</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+</body>
+</html>

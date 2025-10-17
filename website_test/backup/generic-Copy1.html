@@ -1,0 +1,478 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Style recognization</h1>
+									</header>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+
+
+									<hr class="major" />
+
+									<!-- 在 Content 部分的合适位置添加以下代码 -->
+<h2>Style recognization</h2>
+<!-- 在原有HTML结构中，找到视频上传和分析部分，替换为以下代码 -->
+
+<div class="video-upload-container">
+    <input type="file" id="videoUpload" accept="video/*" style="display: none;">
+    <button class="button primary" onclick="document.getElementById('videoUpload').click()">Upload your play</button>
+    <span id="fileName" style="margin-left: 10px;"></span>
+    <div class="video-preview" id="videoPreview"></div>
+    <button class="button" id="analyzeBtn" style="margin-top: 10px; display: none;">Analysis</button>
+    
+    <!-- 修改后的结果显示区域 -->
+    <div class="results" id="results" style="margin-top: 20px; display: none;">
+        <h3>Result</h3>
+        <div class="result-container">
+            <div class="result-content" id="resultContent"></div>
+            <div class="key-frame">
+                <h4>Highlight!</h4>
+                <img id="keyFrameImage" style="max-width: 300px; max-height: 300px;">
+                <div id="keyframeDebugInfo" style="font-size: 12px; color: #666; margin-top: 5px;"></div>
+            </div>
+        </div>
+        <div id="serverResponseInfo" style="margin-top: 15px; font-size: 12px; color: #888;"></div>
+    </div>
+<!-- 在results div下方添加 -->
+<div class="history-section" style="margin-top: 30px;">
+    <h3>History</h3>
+    <div id="keyframeHistory" class="history-grid"></div>
+</div>
+
+<style>
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+.history-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.history-item:hover {
+    border-color: #4CAF50;
+}
+.history-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+.history-info {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #666;
+}
+</style>
+
+<script>
+// 在displayResults函数末尾添加
+
+
+// 新增函数：显示历史记录
+function displayHistory(history) {
+    const container = document.getElementById('keyframeHistory');
+    container.innerHTML = '';
+    
+    history.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'history-item';
+        itemDiv.innerHTML = `
+            <img src="data:image/jpeg;base64,${item.keyframe}" alt="历史记录">
+            <div class="history-info">
+                ${new Date(item.timestamp).toLocaleString()}
+            </div>
+        `;
+        
+        itemDiv.addEventListener('click', function() {
+            // 跳转到elements.html并传递索引
+            window.location.href = `elements.html?history_index=${index}`;
+        });
+        
+        container.appendChild(itemDiv);
+    });
+    
+    // 如果没有历史记录，显示提示
+    if (history.length === 0) {
+        container.innerHTML = '<p>暂无历史记录</p>';
+    }
+}
+
+// 页面加载时获取历史记录
+window.addEventListener('load', function() {
+    fetch('/get_keyframe_history')
+        .then(response => response.json())
+        .then(data => displayHistory(data.history))
+        .catch(error => console.error('获取历史记录失败:', error));
+});
+</script>
+</div>
+
+<style>
+.video-upload-container {
+    margin: 20px 0;
+}
+.video-preview {
+    margin-top: 15px;
+    max-width: 500px;
+    max-height: 300px;
+}
+.video-preview video {
+    max-width: 100%;
+    max-height: 100%;
+}
+.results {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+.result-container {
+    display: flex;
+    gap: 20px;
+}
+.result-content {
+    flex: 1;
+}
+.key-frame {
+    flex: 1;
+    text-align: center;
+}
+.key-frame img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: #fff;
+}
+.result-item {
+    margin: 10px 0;
+}
+.progress-bar {
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+.progress {
+    height: 100%;
+    background: #4CAF50;
+    width: 0%;
+    transition: width 0.3s;
+}
+.debug-info {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+</style>
+
+<script>
+document.getElementById('videoUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('analyzeBtn').style.display = 'block';
+    
+    const videoPreview = document.getElementById('videoPreview');
+    videoPreview.innerHTML = '';
+    
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(file);
+    video.controls = true;
+    videoPreview.appendChild(video);
+    
+    document.getElementById('results').style.display = 'none';
+});
+
+document.getElementById('analyzeBtn').addEventListener('click', function() {
+    const fileInput = document.getElementById('videoUpload');
+    if (!fileInput.files.length) return;
+    
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append('video', file);
+    
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    analyzeBtn.disabled = true;
+    analyzeBtn.textContent = '分析中...';
+    
+    // 清空之前的显示
+    document.getElementById('resultContent').innerHTML = '';
+    document.getElementById('keyFrameImage').src = '';
+    document.getElementById('keyframeDebugInfo').textContent = '';
+    document.getElementById('serverResponseInfo').textContent = '';
+    
+    // 显示加载状态
+    const loadingInfo = document.createElement('div');
+    loadingInfo.textContent = '正在分析视频，请稍候...';
+    document.getElementById('resultContent').appendChild(loadingInfo);
+    
+    // 发送到后端处理
+    fetch('/analyze_video', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("完整服务器响应:", data);
+        document.getElementById('serverResponseInfo').textContent = 
+            `服务器响应: ${JSON.stringify(data, null, 2).substring(0, 150)}...`;
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        
+        // 显示关键帧
+        if (data.key_frame) {
+            const imgElement = document.getElementById('keyFrameImage');
+            imgElement.src = `data:image/jpeg;base64,${data.key_frame}`;
+            
+            // 调试信息
+            document.getElementById('keyframeDebugInfo').innerHTML = `
+                <div>Byte: ${data.key_frame.length} </div>
+                ${data.keyframe_saved_path ? `<div>Save path: ${data.keyframe_saved_path}</div>` : ''}
+            `;
+            
+            // 图片加载错误处理
+            imgElement.onerror = function() {
+                document.getElementById('keyframeDebugInfo').innerHTML += 
+                    '<div style="color:red;">图片加载失败！</div>';
+            };
+        } else {
+            document.getElementById('keyframeDebugInfo').textContent = '未收到关键帧数据';
+        }
+        
+        displayResults(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const errorDiv = document.createElement('div');
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = `分析失败: ${error.message}`;
+        document.getElementById('resultContent').innerHTML = '';
+        document.getElementById('resultContent').appendChild(errorDiv);
+    })
+    .finally(() => {
+        analyzeBtn.disabled = false;
+        analyzeBtn.textContent = 'Analyzing actions...';
+    });
+});
+
+function displayResults(data) {
+    const resultContent = document.getElementById('resultContent');
+    resultContent.innerHTML = '';
+    
+    if (!data.results || data.results.length === 0) {
+        resultContent.textContent = '未获得分析结果';
+        return;
+
+    }
+    
+    // 显示分析结果
+    data.results.forEach(result => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        
+        const label = document.createElement('div');
+        label.textContent = `${result.label}: ${(result.score * 100).toFixed(2)}%`;
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        
+        const progress = document.createElement('div');
+        progress.className = 'progress';
+        progress.style.width = `${result.score * 100}%`;
+        
+        progressBar.appendChild(progress);
+        item.appendChild(label);
+        item.appendChild(progressBar);
+        resultContent.appendChild(item);
+    });
+    
+    // 显示建议
+    if (data.prompt) {
+        const prompt = document.createElement('div');
+        prompt.className = 'prompt';
+        prompt.style.marginTop = '20px';
+        prompt.style.fontWeight = 'bold';
+        prompt.textContent = `Comment: ${data.prompt}`;
+        resultContent.appendChild(prompt);
+    }
+    
+    // 显示保存的关键帧链接
+    if (data.keyframe_saved_path) {
+        const link = document.createElement('a');
+        link.href = `/keyframes/${data.keyframe_saved_path.split('/').pop()}`;
+        link.textContent = "Check out the highlights";
+        link.target = "_blank";
+        link.style.display = "block";
+        link.style.marginTop = "10px";
+        resultContent.appendChild(link);
+    }
+    
+    document.getElementById('results').style.display = 'block';
+
+    displayHistory(data.history || []);
+
+}
+</script>									<h2>Upload the video let us find who is the superstar you would be!</h2>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+									<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+
+									<hr class="major" />
+
+									<h2>Lorem aliquam bibendum</h2>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit.</p>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">Homepage</a></li>
+										<li><a href="generic.html">Style recognization</a></li>
+										<li><a href="elements.html">Create your postcard!</a></li>
+										<li>
+											<span class="opener">Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Etiam Dolore</a></li>
+										<li><a href="#">Adipiscing</a></li>
+										<li>
+											<span class="opener">Another Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Maximus Erat</a></li>
+										<li><a href="#">Sapien Mauris</a></li>
+										<li><a href="#">Amet Lacinia</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "semiotic-abbey-440808-d1",
+  "private_key_id": "39bf0c3886e176f0519212b0113d7910e60cd03e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCqo+wT69iwZKnQ\n1RW12fUYTLewRGq7h6Ci/Hzn5+CAD7MTpykPNH98sQmL8rDWcu7m6Lbn9qh1AU3E\nAaPmenVdwJz55z87ihW5xONis1t7JEXSEyalIjQUuo6KhN1eycdMwJxLIgVtQjVS\nJDfDkClk9YUlpOFqEbFrYS1/YIEtCwwI10X+/4aD+NdzEC2+nGZ9l1mgy/bBJ1p8\nm3/wZzU/8oz0lZw4a+y7wjZA1IJbYd18uNxm+/G5nAw+PWQCSvE5DWD/dgHon8kR\nKUsduYHWeG8rH3rsDt2gCOiKscl8SmcHfWl2SnoTaZ/WQtnxdpljCAZaTqPVeyW+\ncspFtZ4hAgMBAAECggEADvZZpHOJKApjk4KjqTLn2U4cyzFslG3ziWcPQrxjxIbb\n4mzFXmZxiUrytdk9ZUhlp0yfgR5xLfVDztx/9R0mvmY9vXHn6v4UIppff8+PRXBs\nSNvSByfFHk4vYnj8+itCNPosmi/s/uQPzdiMJTM2VfprRt46v7S2dF5sgV9CZGMP\nbR36BsbEYMFgW1T4hJM2awFMMxNdGzdlS32Ypgo9U0225WAJmhr5BrO1VjE9/bze\nho24EWPmSa870LP6VgEwjRHeVk5IT+sNbeR8w1h+ElYSN2lNHKPb5kHGXDWWhsfR\nrjkNZ8WI4pyS1/wEqPQ7VoNg2GhhwBf4poV+7gZqMwKBgQDVk3nWTK0adrHVZiPl\n5rrqT7uKhyF85vXroQGPofkAMQWzPzvA1OYivM0JkaHiuHZwZfSKpdQXGPaGUrA0\nurspSSatKr5eCcsO705kSL+s1Pus1v2SGAhwNfX/jpScbgzinR5jF+hg/sqHyYWJ\nQp8GhB5Q4aM1NSzeQ/51MlEa0wKBgQDMiSBxSf9rscjzt/+OAXT24RdiS5o1IdPb\nj+U4VfbYN3DLlRnAkGFGgI/pzHZ8T1/dd4QeeVJ1AgHUD8doho12RHsTmmt6hSj/\nf0zOYc5EV03p44jQ+ZTCXSWdisL/pNg3Ao/d8szlmQt2BeKYm7xGR8Vz0N3D6oOo\n/wDGVx0iuwKBgQC7KA7+YhbXN+hCjs0qa/Sj29cGX8BSybn7EA5kJZYkOtE58FGW\ne3poOnaaygnIucjgWhffX83pp7BwqQlMS84zMa041loX4hEVN1PEwZNmCwW4wnVW\njsTmQAMgPXuxUSbtdq3oPE0gomYsc8YXMFBWz3QZgIEa4Uw+Qes8HCnCjQKBgFgX\nTzO7zRhTD9t4CcbddcTGmU2qhhYQJbDQvsaOr6vb5Oappte610qIIHNvrjBH91/p\nE6wUUKE4ZhUxXo70NIUVZXTB8zxnkYrJBwl0MmRYvaPYbZqjg6BagdLiaq20D7NR\nlSjgY8MXMUp5qmhT2rjiPHZvJLQ2ktH8Uhcaed/1AoGBAMZiHZvRV4N5U27Ss/y/\nDzfIP6VSvNtVOMtFv7Q7t52XZ77QFgy/hntx9Do3SX5ziU7S1rrvhats/0cjHid5\n70d30M6do5X9q7tsQMu+zq+fCfqJ9KNzqN+6xnVEFOzaiXXVMk36JrUAOYUz7iLx\nvPi4OjJNMQVXlw1Qs+3tRMME\n-----END PRIVATE KEY-----\n",
+  "client_email": "vertexai-manager@semiotic-abbey-440808-d1.iam.gserviceaccount.com",
+  "client_id": "111738686533920962019",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/vertexai-manager%40semiotic-abbey-440808-d1.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
