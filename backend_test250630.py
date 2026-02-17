@@ -32,7 +32,7 @@ config_path = 'configs/recognition/tsn/tsn_20250513_480_tsn_imagenet-pretrained-
 checkpoint_path = 'work_dirs/tsn_20250513_480_tsn_imagenet-pretrained-r50_8xb32-1x1x3-100e_kinetics400-rgb-Copy1/best_acc_top1_epoch_28.pth'
 labels = open('data/action_label.txt').readlines()
 labels = [x.strip() for x in labels]
-model = init_recognizer(config_path, checkpoint_path, device="cuda:1")
+model = init_recognizer(config_path, checkpoint_path, device="cpu")
 
 # 球队映射字典
 team_mapping = {
