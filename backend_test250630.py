@@ -10,8 +10,10 @@ import base64
 from io import BytesIO
 from datetime import datetime
 import json
-from google import genai
-from google.genai import types
+
+#if build in google studio,enable it 20260217 update 
+#from google import genai
+#from google.genai import types
 import time
 import subprocess
 app = Flask(__name__, template_folder='website_test', static_folder='website_test/assets')
@@ -50,7 +52,8 @@ TEAM_JERSEY_MAP = {
 }
 
 # 初始化Gemini
-client = genai.Client(api_key="AIzaSyACbfe8yCB7DMdNjiaASK-nGxbxMFZFHe0")
+#if build on google studio enable it 20250217
+#client = genai.Client(api_key="AIzaSyACbfe8yCB7DMdNjiaASK-nGxbxMFZFHe0")
 
 # 加载历史记录
 def load_history():
